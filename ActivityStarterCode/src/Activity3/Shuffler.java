@@ -18,7 +18,7 @@ public class Shuffler {
 	 * to each sorting procedure.
 	 */
 	private static final int SHUFFLE_COUNT = 8;
-        private static final int VALUE_COUNT = 52;
+        private static final int VALUE_COUNT = 4;
 
 
 	/**

@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Activity2;
-
+package Activity4;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ public class Deck {
 	/**
 	 * cards contains all the cards in the deck.
 	 */
-	private final List<Card> cards;
+	private List<Card> cards;
 
 	/**
 	 * size is the number of not-yet-dealt cards.
@@ -38,16 +37,15 @@ public class Deck {
 	 * @param values is an array containing all of the card point values.
 	 */
 	public Deck(String[] ranks, String[] suits, int[] values) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-                this.cards = new ArrayList();
-                if (ranks.length == suits.length){
-                    for(int i = 0; i < ranks.length; i++){
-                        for (int j = 0; j < suits.length; j++){
-                        this.cards.add(new Card(ranks[i], suits[j], values[i]));
-                        }
-                    }
-                }
-                this.size = this.cards.size();
+		cards = new ArrayList<Card>();
+		for (int j = 0; j < ranks.length; j++) {
+			for (String suitString : suits) {
+				cards.add(new Card(ranks[j], suitString, values[j]));
+			}
+		}
+		size = cards.size();
+		shuffle();
+                
 	}
 
 
@@ -56,8 +54,7 @@ public class Deck {
 	 * @return true if this deck is empty, false otherwise.
 	 */
 	public boolean isEmpty() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-              return size==0;
+		return size == 0;
 	}
 
 	/**
@@ -65,8 +62,7 @@ public class Deck {
 	 * @return the number of undealt cards in this deck.
 	 */
 	public int size() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-                return size;
+		return size;
 	}
 
 	/**
@@ -75,6 +71,15 @@ public class Deck {
 	 */
 	public void shuffle() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
+                int k = size - 1;
+
+                for(; k >= 0; k--){
+                    int r =  (int) (Math.random() * k);
+                    Card shuffled = cards.get(r);
+                    cards.set(r, cards.get(k));
+                    cards.set(k, shuffled);
+                }
+
 	}
 
 	/**
@@ -83,12 +88,12 @@ public class Deck {
 	 *         previously dealt.
 	 */
 	public Card deal() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-                this.size = this.size - 1;
-                if (this.size > 0){
-                    return this.cards.get(this.size);
-                }
-                return null;
+		if (isEmpty()) {
+			return null;
+		}
+		size--;
+		Card c = cards.get(size);
+		return c;
 	}
 
 	/**
