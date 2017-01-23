@@ -61,6 +61,13 @@ public class ElevensBoard extends Board {
 	@Override
 	public boolean isLegal(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+                if (selectedCards.size() == 2){
+                    return containsPairSum11(selectedCards);
+                }else if(selectedCards.size() == 3){
+                    return containsJQK(selectedCards);
+                }
+                return false;
+                
 	}
 
 	/**
@@ -74,6 +81,12 @@ public class ElevensBoard extends Board {
 	@Override
 	public boolean anotherPlayIsPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+                List<Integer> k = cardIndexes();
+                if (containsPairSum11(k) == false){
+                    return containsJQK(k);
+                }
+                return false;
+                
 	}
 
 	/**
@@ -86,6 +99,12 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean containsPairSum11(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+                int firstCard = selectedCards.get(0);
+                int secondCard = selectedCards.get(1);
+                if(cardAt(firstCard).pointValue() + cardAt(secondCard).pointValue() == 11){
+                    return true;
+                }
+                return false;
 	}
 
 	/**
@@ -98,5 +117,22 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean containsJQK(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+                boolean jack = false;
+                boolean queen = false;
+                boolean king = false;
+                for (int i = 0; i < selectedCards.size(); i++){
+                    if ("jack".equals(cardAt(selectedCards.get(i)).rank())){
+                    jack = true;
+                    }
+                    if ("queen".equals(cardAt(selectedCards.get(i)).rank())){
+                    queen = true;
+                    }
+                    
+                    if ("king".equals(cardAt(selectedCards.get(i)).rank())){
+                    king = true;
+                    }
+                }
+                return (jack && queen && king);
+                
 	}
 }

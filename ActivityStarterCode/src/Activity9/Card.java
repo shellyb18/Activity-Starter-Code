@@ -45,6 +45,10 @@ public class Card {
 		pointValue = cardPointValue;
 	}
 
+    Card() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 	/**
 	 * Accesses this <code>Card's</code> suit.
